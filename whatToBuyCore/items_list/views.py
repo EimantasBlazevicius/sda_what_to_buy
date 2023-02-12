@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import ShoppingList
 
 
-def hello(request, anything):
-    return HttpResponse(f'<h1>Potato Wars are {anything}?</h1>')
+def my_lists(request):
+    shopping_lists = ShoppingList.objects.all()
+    return render(request, "shopping_list.html",  context={"shopping_lists": shopping_lists})
 
 
 def hello2(request):
