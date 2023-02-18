@@ -1,5 +1,6 @@
 from django.db.models import (
     CASCADE, CharField, ForeignKey, Model, BooleanField)
+from django.urls import reverse
 
 
 class ShoppingList(Model):
@@ -17,3 +18,6 @@ class ShoppingItem(Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('items_lists', kwargs={'pk': self.shopping_list.pk})
