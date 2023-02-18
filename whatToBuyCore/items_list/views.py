@@ -2,6 +2,10 @@ from django.shortcuts import render
 from .models import ShoppingList, ShoppingItem
 
 
+def home(request):
+    return render(request, "home.html")
+
+
 def my_lists(request):
     shopping_lists = ShoppingList.objects.all()
     return render(request, "shopping_lists.html",  context={"shopping_lists": shopping_lists})
