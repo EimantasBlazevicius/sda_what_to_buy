@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import ShoppingList, ShoppingItem
+from .models import ShoppingList
 
 
 def home(request):
@@ -7,8 +7,14 @@ def home(request):
 
 
 def my_lists(request):
-    shopping_lists = ShoppingList.objects.all()
-    return render(request, "shopping_lists.html", context={"shopping_lists": shopping_lists})
+    if request.method == "GET":
+        shopping_lists = ShoppingList.objects.filter(user=request.user)
+        return render(request, "shopping_lists.html", context={"shopping_lists": shopping_lists})
+    if request.method == "POST":
+        if request.POST.get('reciepe_add'):
+            item_name = request.POST.get("reciepe")
+            ShoppingList.objects.create(title=item_name, user=request.user)
+        return redirect('lists-list')
 
 
 def items_list(request, pk):
