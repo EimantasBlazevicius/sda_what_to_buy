@@ -14,6 +14,11 @@ def my_lists(request):
         if request.POST.get('reciepe_add'):
             item_name = request.POST.get("reciepe")
             ShoppingList.objects.create(title=item_name, user=request.user)
+        elif request.POST.get('delete'):
+            id_to_delete = request.POST.get("delete")
+            item_to_delete = ShoppingList.objects.get(
+                pk=id_to_delete)
+            item_to_delete.delete()
         return redirect('lists-list')
 
 

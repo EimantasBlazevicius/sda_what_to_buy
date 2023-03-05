@@ -2,13 +2,13 @@
 <form method="POST" action="#">
   {% csrf_token %}
   <div class="row">
-    <div class="col-8">
+    <div class="col-12 col-lg-8">
       <table class="table table-hover">
         <thead>
           <tr>
             <th scope="col">#</th>
             <th scope="col">Title</th>
-            <th scope="col">Last Used</th>
+            <th scope="col">Created At</th>
             <th scope="col">Actions</th>
           </tr>
         </thead>
@@ -17,10 +17,9 @@
           <tr>
             <th scope="row">{{shopping_list.id}}</th>
             <td><a href="{{shopping_list.id}}">{{shopping_list.title}}</a></td>
-            <td>2023-02-12</td>
+            <td>{{shopping_list.created_at}}</td>
             <td>
-              <button class="btn btn-primary">Update</button>
-              <button class="btn btn-danger ml-2">Delete</button>
+              <button class="btn btn-danger ml-2" type="submit" name="delete" value="{{shopping_list.id}}">Delete</button>
             </td>
           </tr>
           {% endfor %}
