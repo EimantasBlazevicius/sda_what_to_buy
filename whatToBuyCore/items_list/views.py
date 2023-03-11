@@ -8,6 +8,7 @@ def home(request):
 
 def my_lists(request):
     if request.method == "GET":
+        print(request.META)
         shopping_lists = ShoppingList.objects.filter(user=request.user)
         return render(request, "shopping_lists.html", context={"shopping_lists": shopping_lists})
     if request.method == "POST":
